@@ -7,6 +7,7 @@ var userAgent=navigator.userAgent;//代理信息
 
 $(function () {
     $('#phone').bind('input propertychange',function () {
+        console.log(1);
         var Phone=$("#phone").val().trim().length;
         if (Phone === 11 ){
             $(".getCode").css({
