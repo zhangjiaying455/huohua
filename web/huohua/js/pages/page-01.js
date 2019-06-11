@@ -7,7 +7,6 @@ var userAgent=navigator.userAgent;//代理信息
 
 $(function () {
     $('#phone').bind('input propertychange',function () {
-        console.log(1);
         var Phone=$("#phone").val().trim().length;
         if (Phone === 11 ){
             $(".getCode").css({
@@ -112,7 +111,6 @@ function getInfo01(element) {
                 headers:{"Content-Type":"application/x-www-form-urlencoded"},
                 dataType: 'json',
                 success: function(data){
-                    // console.log(data)
                     if(data===200){
                         $.ajax({
                             type:'POST',
@@ -126,22 +124,34 @@ function getInfo01(element) {
                             },
                             dataType: 'json',
                             success: function(data){
-                                // console.log(data);
-                                $('.modal-h3').html("抢课成功")
-                                 getDialog();
+                                if (data === 201){
+                                    $('.modal-h3').html("您已领取过")
+                                    getDialog();
+                                } else{
+                                    $('.modal-h3').html("抢课成功")
+                                    getDialog();
+                                }
+                                $("#age").val("")
+                                $("#identity").val("")
+                                $("#phone").val("")
+                                $("#code").val("")
+
                             },
                             error: function(error){
-                                $('.modal-h3').html("抢课失败")
-                                 getDialog();
+                                if (error.responseText === 'err403'){
+                                    $('.modal-h3').html("抢课失败")
+                                    getDialog();
+                                }
                             }
                         });
-                    }else{
-                        $('.modal-h3').html("验证码错误")
-                        getDialog();
                     }
                 },
                 error: function(error){
                     console.log(error);
+                    if (error.responseText === 'err403'){
+                        $('.modal-h3').html("验证码错误")
+                        getDialog();
+                    }
                 }
             })
         }
@@ -158,7 +168,6 @@ function getCode(obj) {
         getDialog();
     }else{
         $('.code').css('display','block')
-        countDown(obj);
         $.ajax({
             type:'GET',
             url: 'http://47.92.205.63:21667/sms/sendCode?mobile='+phone,
@@ -167,14 +176,13 @@ function getCode(obj) {
             success: function(data){
                 if (data === 200) {
                     $('.modal-h3').html("验证码已发送")
-                    getDialog();
-                }else{
-                    $('.modal-h3').html("发送失败,稍后重新领取")
+                    countDown(obj);
                     getDialog();
                 }
             },
             error: function(error){
-                console.log(error);
+                $('.modal-h3').html("验证码发送失败")
+                getDialog();
             }
         })
     }
