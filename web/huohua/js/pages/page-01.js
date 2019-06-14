@@ -83,7 +83,7 @@ function getInfo01(element) {
     var identity=$("#identity").val()
     var phone=$("#phone").val().trim()
     var code=$("#code").val().trim()
-    var myreg= /^1[3|4|5|7|8][0-9]{9}$/;
+    var myreg= /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
     let RecurrenceId = getRequestByName("ID");
     if(RecurrenceId==""){
         RecurrenceId='test-00000000';
@@ -159,7 +159,7 @@ function getInfo01(element) {
 }
 function getCode(obj) {
     var phone=$("#phone").val().trim()
-    var myreg= /^1[3|4|5|7|8][0-9]{9}$/;
+    var myreg= /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
     if (!phone){
         $('.modal-h3').html("请输入手机号")
         getDialog();
