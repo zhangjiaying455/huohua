@@ -31,7 +31,7 @@ $(function () {
             'userAgent':userAgent,
             'ip':ip,
             'url':url,
-            'sign':sign,
+            'sign':"",
             'flag':2
         },
         dataType: 'json',
@@ -58,7 +58,7 @@ $(function () {
                         'url':url,//url
                         'ip':ip,//ip地址
                         'userAgent':userAgent,//代理信息
-                        'sign':sign, //url携带的参数信息
+                        'sign':"", //url携带的参数信息
                         'totalTime':second,//停留时间秒
                         'otherInfo':''
                     },
@@ -79,6 +79,7 @@ $(function () {
     getTime();
  })
 function getInfo01(element) {
+    //在按钮提交之后和AJAX提交之前将按钮设置为禁用
     var age=parseInt($("#age").val())
     var identity=$("#identity").val()
     var phone=$("#phone").val().trim()
@@ -111,8 +112,9 @@ function getInfo01(element) {
                 headers:{"Content-Type":"application/x-www-form-urlencoded"},
                 dataType: 'json',
                 success: function(data){
-                    if(data===200){
-                        $.ajax({
+                    //在按钮提交之后和AJAX提交之前将按钮设置为禁用
+                    $("#btn01").attr('disabled',true)
+                    $.ajax({
                             type:'POST',
                             url: 'http://47.92.205.63:21667/info/setInfo',
                             headers:{"Content-Type":"application/x-www-form-urlencoded"},
@@ -123,8 +125,9 @@ function getInfo01(element) {
                                 'RecurrenceId':RecurrenceId
                             },
                             dataType: 'json',
-                            success: function(data){
-                                if (data === 201){
+                            success: function(result){
+                                console.log(result)
+                                if (result.resp === "201"){
                                     $('.modal-h3').html("您已领取过")
                                     getDialog();
                                 } else{
@@ -135,23 +138,21 @@ function getInfo01(element) {
                                 $("#identity").val("")
                                 $("#phone").val("")
                                 $("#code").val("")
-
+                                $("#btn01").attr('disabled',false)
                             },
                             error: function(error){
-                                if (error.responseText === 'err403'){
+                                if (error.responseText == 'err403'){
+                                    debugger
                                     $('.modal-h3').html("抢课失败")
                                     getDialog();
+                                    $("#btn01").attr('disabled',false)
                                 }
                             }
                         });
-                    }
                 },
                 error: function(error){
-                    console.log(error);
-                    if (error.responseText === 'err403'){
-                        $('.modal-h3').html("验证码错误")
-                        getDialog();
-                    }
+                    $('.modal-h3').html("验证码错误")
+                    getDialog();
                 }
             })
         }
@@ -174,11 +175,10 @@ function getCode(obj) {
             headers:{"Content-Type":"application/x-www-form-urlencoded"},
             dataType: 'json',
             success: function(data){
-                if (data === 200) {
+                console.log(data)
                     $('.modal-h3').html("验证码已发送")
                     countDown(obj);
                     getDialog();
-                }
             },
             error: function(error){
                 $('.modal-h3').html("验证码发送失败")
