@@ -112,7 +112,7 @@ function getInfo01(element) {
                 headers:{"Content-Type":"application/x-www-form-urlencoded"},
                 dataType: 'json',
                 success: function(data){
-                    //在按钮提交之后和AJAX提交之前将按钮设置为禁用
+                    //在按钮提交之后和AJAX提交之前将按钮设置禁用
                     $("#btn01").attr('disabled',true)
                     $.ajax({
                             type:'POST',
@@ -134,12 +134,18 @@ function getInfo01(element) {
                                     getDialog();
                                 }
                                 window.location.reload();
+                                $("#age").val("");
+                                $("#identity").val("");
+                                $("#phone").val("");
                                 $("#btn01").attr('disabled',false)
                             },
                             error: function(error){
                                 $('.modal-h3').html("抢课失败")
                                 getDialog();
                                 window.location.reload();
+                                $("#age").val("");
+                                $("#identity").val("");
+                                $("#phone").val("");
                                 $("#btn01").attr('disabled',false)
                             }
                         });
