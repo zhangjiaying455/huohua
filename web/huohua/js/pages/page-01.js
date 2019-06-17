@@ -126,7 +126,6 @@ function getInfo01(element) {
                             },
                             dataType: 'json',
                             success: function(result){
-                                console.log(result)
                                 if (result.resp === "201"){
                                     $('.modal-h3').html("您已领取过")
                                     getDialog();
@@ -134,19 +133,14 @@ function getInfo01(element) {
                                     $('.modal-h3').html("抢课成功")
                                     getDialog();
                                 }
-                                $("#age").val("")
-                                $("#identity").val("")
-                                $("#phone").val("")
-                                $("#code").val("")
+                                window.location.reload();
                                 $("#btn01").attr('disabled',false)
                             },
                             error: function(error){
-                                if (error.responseText == 'err403'){
-                                    debugger
-                                    $('.modal-h3').html("抢课失败")
-                                    getDialog();
-                                    $("#btn01").attr('disabled',false)
-                                }
+                                $('.modal-h3').html("抢课失败")
+                                getDialog();
+                                window.location.reload();
+                                $("#btn01").attr('disabled',false)
                             }
                         });
                 },
@@ -175,7 +169,6 @@ function getCode(obj) {
             headers:{"Content-Type":"application/x-www-form-urlencoded"},
             dataType: 'json',
             success: function(data){
-                console.log(data)
                     $('.modal-h3').html("验证码已发送")
                     countDown(obj);
                     getDialog();
