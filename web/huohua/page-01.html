@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>让3-9岁孩子动手动脑爱思考</title>
+    <script src="css/flexible-css.min.js"></script>
+    <script src="css/flexible.min.js"></script>
+
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/pages/page-01.css">
+</head>
+<body>
+    <div class="main">
+        <div class="content">
+            <img src="images/page-01/img-01.jpg">
+        </div>
+        <div class="video">
+            <video width="100%" height="100%" poster="images/page-01/img-video.png" controls id="video">
+            <source type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' src="images/page-01/f47a6c287263a9664e317edc83ab2cd4.mp4"/>
+            </video>
+        </div>
+        <div class="form">
+            <div class="form-content">
+                <h2 class="form-title">限今日<em>0元</em>领取<em>¥<span>298</span></em>精品试听课</h2>
+                <div class="input-form">
+                    <div class="input-wrapper">
+                        <select class="select-age-num" id="age">
+                            <option value="" selected="selected">孩子年龄</option>
+                            <option value="3">3岁</option>
+                            <option value="4">4岁</option>
+                            <option value="5">5岁</option>
+                            <option value="6">6岁</option>
+                            <option value="7">7岁</option>
+                            <option value="8">8岁</option>
+                        </select>
+                    </div>
+                    <div class="input-wrapper">
+                        <select class="select-age-num" id="identity">
+                            <option value="" selected="selected">家长身份</option>
+                            <option value="爸爸">爸爸</option>
+                            <option value="妈妈">妈妈</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="number" maxlength="11" class="input-phone-num" placeholder="请输入手机号" id="phone"/>
+                        <input type="button" class="getCode" value="获取验证码" id="button1" onclick="getCode(this)"></button>
+                    </div>
+                    <div class="input-wrapper code">
+                        <input type="number" class="input-code-num" placeholder="请输入验证码" id="code"/>
+                    </div>
+                    <button type="button" class="txt-button" id="btn01" onclick="getInfo01(this)">马上抢课</button>
+                </div>
+                <p class="trail">3日内将有010-6477XXXX与您联系</p>
+                <p class="trail">安排孩子试听,请注意接听</p>
+            </div>
+        </div>
+        <div class="content">
+            <img src="images/page-01/img-02.jpg">
+        </div>
+        <div class="modal">
+            <div class="modal-message">
+                <h3 class="modal-h3"></h3>
+            </div>
+        </div>
+    </div>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/pages/page-01.js"></script>
+</body>
+</html>
